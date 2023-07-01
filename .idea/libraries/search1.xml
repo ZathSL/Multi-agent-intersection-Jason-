@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="search1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/intersection/src/lib/search.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

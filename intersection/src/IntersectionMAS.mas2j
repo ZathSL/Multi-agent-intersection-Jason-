@@ -1,0 +1,10 @@
+MAS intersection {
+    infrastructure: Centralised
+
+    environment: env.Intersection(yes,10)
+    // parametri: 1. interfaccia grafica
+    //            2. sleep time (in ms) dopo ogni azione
+
+    agents:
+        vehicle_agent #4;
+}

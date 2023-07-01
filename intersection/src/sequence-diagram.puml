@@ -1,0 +1,24 @@
+@startuml
+participant "VehicleAgent 1" as vehicle1
+participant "VehicleAgent 2" as vehicle2
+participant "Environment" as env
+
+vehicle1 -> env: Enter()
+vehicle2 -> env: Enter()
+vehicle1 -> vehicle1: !Goal(Final_pos)
+vehicle2 -> vehicle2: !Goal(Final_pos)
+vehicle1 -> vehicle1: !Plan(NextStep)
+vehicle2 -> vehicle2: !Plan(NextStep)
+env -> vehicle1: Percept(vehicle2)
+env -> vehicle2: Percept(vehicle1)
+vehicle1 -> env: Do(NextStep)
+vehicle2 -> env: Do(NextStep)
+env -> vehicle1: Percept(vehicle2)
+env -> vehicle2: Percept(vehicle1)
+vehicle1 -> env: Arrived()
+env -> vehicle2: Percept(vehicle1)
+vehicle2 -> vehicle2: !Plan(NextStep)
+vehicle2 -> env: Do(NextStep)
+vehicle2 -> env: Arrived()
+
+@enduml
