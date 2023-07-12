@@ -52,11 +52,8 @@ last_dir(null). //l'ultimo movimento che ho fatto
 
 /* end of a simulation */
 
-+!arrived : pos(X,Y) & final_x(Xf) & final_y(Yf)
-  <- !end_ag;
++!arrived : pos(X,Y) & final_x(Xf) & final_y(Yf) & my_name(AgName)
+  <-
      .drop_all_desires;
-     .print("-- END --. La mia posizione è (",X,",",Y,") e la posizione finale è (",Xf,",",Yf,")").
-
-+!end_ag: my_name(AgName)
-   <- 	.print(AgName);
-   		algs.end_ag(AgName).
+     .print("-- END --. La mia posizione è (",X,",",Y,") e la posizione finale è (",Xf,",",Yf,")");
+     algs.end_ag(AgName).
