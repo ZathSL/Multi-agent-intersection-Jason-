@@ -46,6 +46,11 @@ public class WorldModel extends GridWorldModel {
 
     boolean move(Intersection.Move dir, int ag) throws Exception{
         Location l = getAgPos(ag);
+        try {
+            Thread.sleep(1000);
+        }catch (Exception e){
+            throw new Exception(e);
+        }
         switch (dir){
             case UP:
                 if (isFree(l.x, l.y - 1)){
@@ -79,7 +84,5 @@ public class WorldModel extends GridWorldModel {
         model.setAgPos(3, 20, 20);
         return model;
     }
-
-
 
 }
