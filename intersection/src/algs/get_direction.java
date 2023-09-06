@@ -7,6 +7,7 @@ import jason.asSemantics.TransitionSystem;
 import jason.asSemantics.Unifier;
 import jason.asSyntax.Atom;
 import jason.asSyntax.NumberTerm;
+import jason.asSyntax.NumberTermImpl;
 import jason.asSyntax.Term;
 import jason.environment.grid.GridWorldModel;
 import jason.environment.grid.Location;
@@ -49,7 +50,24 @@ public class get_direction extends DefaultInternalAction {
                     System.out.println("No route from (x:"+iagx+",y:"+iagy+") to (x:"+itox+",y:"+itoy+")");
                 }
             }
-            return un.unifies(terms[4], new Atom(sAction));
+            int next_X = iagx;
+            int next_Y = iagy;
+            switch (sAction){
+                case "up":
+                    next_Y--;
+                    break;
+                case "down":
+                    next_Y++;
+                    break;
+                case "left":
+                    next_X--;
+                    break;
+                case "right":
+                    next_X++;
+                    //System.out.println("Sono in posizione x:" + iagx + ", y:" +iagy + ". La mia intenzione è di andare " + sAction + " e finiro in posizione x:" + next_X + " y:"+next_Y);
+                    break;
+            }
+            return un.unifies(terms[4], new Atom(sAction)) && un.unifies(terms[5], new NumberTermImpl(next_X)) && un.unifies(terms[6], new NumberTermImpl(next_Y));
         }catch (Throwable e){
             e.printStackTrace();
             return false;

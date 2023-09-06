@@ -18,8 +18,10 @@ public class random_number extends DefaultInternalAction {
             Random rand = new Random();
             WorldModel model = WorldModel.get();
 
-            int randomNumberX = rand.nextInt(model.getHeight());
-            int randomNumberY = rand.nextInt(model.getWidth());
+           /* int randomNumberX = rand.nextInt(model.getHeight());
+            int randomNumberY = rand.nextInt(model.getWidth());*/
+            int randomNumberX = 2;
+            int randomNumberY = 2;
 
             return (un.unifies(terms[0], new NumberTermImpl(randomNumberX)) && un.unifies(terms[1], new NumberTermImpl(randomNumberY)));
         }catch (Throwable e){

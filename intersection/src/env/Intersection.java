@@ -103,12 +103,6 @@ public class Intersection extends jason.environment.Environment{
             }
         }
 
-        public void endSimulation(String agName){
-            addPercept(Literal.parseLiteral("end_of_simulation"));
-            int id = getAgIdBasedOnName(agName);
-            model.remove(id, model.getAgPos(id));
-        }
-
 
         private void updateAgsPercept(){
             for(int i=0; i<model.getNbOfAgs(); i++){
@@ -127,6 +121,7 @@ public class Intersection extends jason.environment.Environment{
             Literal positionLiteral = Literal.parseLiteral("pos("+l.x+","+l.y+")");
             addPercept(agName, positionLiteral);
             addPercept(agName, Literal.parseLiteral("my_name("+agName+")"));
+            addPercept(agName, Literal.parseLiteral("priority(" + ag + ")"));
             //posizione degli altri agenti
             for(Location pos : model.getAgsPos()){
                 if(!pos.equals(l)){
