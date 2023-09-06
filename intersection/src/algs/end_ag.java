@@ -16,11 +16,11 @@ public class end_ag extends DefaultInternalAction {
             // Ottieni il nome dell'agente da terms[0]
             if (terms.length > 0) {
                 String agentName = terms[0].toString();
-                System.out.println("Il nome dell'agente è: " + agentName);
+                System.out.println("L'agente " + agentName + " ha terminato correttamente il suo percorso!");
 
                 // Chiamata all'azione end_ag passando il nome dell'agente
                 int id = Integer.parseInt(agentName.substring(13)) -1;
-                //TODO implementare terminazione dell'agente
+                model.end_ag(id);
                 return true;
             } else {
                 System.out.println("Nessun nome dell'agente fornito.");
