@@ -83,11 +83,10 @@ public class WorldModel extends GridWorldModel {
         Location location = getAgPos(ag);
         remove(2,location);
 
-        System.out.println("Agente "+ (ag + 1) + " rimosso correttamente dal sistema");
+        System.out.println("Agente "+ (ag + 1) + " è uscito correttamente dal sistema");
 
         numAg--;
         if(numAg == 0){
-            System.out.println("asdasd");
             destroy();
             view.setVisible(false);
         }

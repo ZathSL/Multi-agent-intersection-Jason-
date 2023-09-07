@@ -10,11 +10,23 @@ all_answers_received
 
 /* belief per inizializzare */
 
-+gsize(_,_) : true //S is the simulation Id
++gsize(_,_) : true 
     <-
 	   +initialized;
        !initialize_end.
 
++!initialize_end
+	: initialized
+	<- 
+		algs.random_number(Xf,Yf);
+		+final_x(Xf);
+		+final_y(Yf);
+		.df_register("vehicle");
+		.df_subscribe("vehicle");
+		-initialized;
+		!next_step(Xf,Yf).
+
+	   
 /* Mail-box */
 /*Devo rispondere a una richiesta di possibile movimento */			
 @priority(4) +value(X,Y,P)[source(A)]: priority(My_P) & next_x(MX) & next_y(MY) & my_name(Name)
@@ -39,16 +51,6 @@ all_answers_received
 
 /* plans for reached the final position */
 
-+!initialize_end
-	: initialized
-	<- 
-		algs.random_number(Xf,Yf);
-		+final_x(Xf);
-		+final_y(Yf);
-		.df_register("vehicle");
-		.df_subscribe("vehicle");
-		-initialized;
-		!next_step(Xf,Yf).
 
 @priority(7) +!next_step(X,Y)
     : pos(AgX,AgY) & gsize(Dim_height,Dim_width) & final_x(Xf) & final_y(Yf) & priority(P) & my_name(Name)
@@ -60,7 +62,6 @@ all_answers_received
 	   .delete(Name,V,New_V);
 	   .send(New_V,tell, value(Next_X,Next_Y,P));
 	   -+nb_agents(.length(New_V));
-	   // Attendo fino a 4 secondi per ricevere le risposte
 	   !check_msg(X,Y,D).
 
 +!next_step(X,Y) : not pos(_,_) //non so ancora la mia posizione
@@ -86,7 +87,8 @@ all_answers_received
 			
 	
 @priority(6) +!check_msg(X,Y,D): true
-	<-  .wait(all_answers_received, 4000, _);
+	<-  	// Attendo fino a 4 secondi per ricevere le risposte
+		.wait(all_answers_received, 4000, _);
 		?refuse(_);
 		.abolish(refuse(_)[source(_)]);
 		.abolish(accept(_)[source(_)]);
