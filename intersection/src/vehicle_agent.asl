@@ -39,15 +39,6 @@ all_answers_received
 		  -value(X,Y,P)[source(A)];
 		}.
 
-/* Un agente mi ha detto di non muovermi */	
-/*@priority(3) +refuse(Ag_name)[source(_)]: true
-	<- +refuse(Ag_name).*/
-
-/* Un agente mi ha detto che per lui è ok */	
-/*@priority(4) +accept(Ag_name)[source(_)]: true
-	<- +accept(Ag_name).*/
-
-	   
 
 /* plans for reached the final position */
 
@@ -79,6 +70,7 @@ all_answers_received
 				-+last_dir(null);
 				!next_step(X,Y);
 			}.
+
 @priority(2) +refuse(A): true
 	<- true.
 			
@@ -109,7 +101,7 @@ all_answers_received
 		
 /* end of a simulation */
 
-@priority(1)+!arrived : pos(X,Y) & final_x(Xf) & final_y(Yf) & my_name(AgName)
+@priority(1) +!arrived : pos(X,Y) & final_x(Xf) & final_y(Yf) & my_name(AgName)
   <-
      .drop_all_desires;
 	 .df_deregister("vehicle");
